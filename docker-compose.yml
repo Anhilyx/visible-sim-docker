@@ -1,0 +1,25 @@
+services:
+
+  visible-sim:
+    build:
+      context: .docker
+      dockerfile: Dockerfile
+    container_name: visible-sim
+
+    environment:
+      - PUID=1000
+      - PGID=1000
+
+    ports:
+      - "5000:3000"  # Linux Webtop
+      - "8000:8000"  # VSCode Server
+
+    volumes:
+      - vscode-server_data:/.vscode
+      - ./src:/opt/VisibleSim/applicationsSrc
+
+    shm_size: "1gb"
+    restart: unless-stopped
+
+volumes:
+  vscode-server_data:
