@@ -31,7 +31,7 @@ RUN mkdir -p /.vscode
 RUN mkdir -p /etc/s6-overlay/s6-rc.d/code-server /etc/s6-overlay/s6-rc.d/user/contents.d && \
     echo "longrun" > /etc/s6-overlay/s6-rc.d/code-server/type && \
     echo '#!/bin/bash' > /etc/s6-overlay/s6-rc.d/code-server/run && \
-    echo 'exec /opt/code serve-web --port 8000 --host 0.0.0.0 --server-data-dir /.vscode --accept-server-license-terms --without-connection-token' >> /etc/s6-overlay/s6-rc.d/code-server/run && \
+    echo 'exec /opt/code serve-web --port 8000 --host 0.0.0.0 --server-data-dir /.vscode --default-folder=/opt/VisibleSim/applicationsSrc --accept-server-license-terms --without-connection-token' >> /etc/s6-overlay/s6-rc.d/code-server/run && \
     chmod +x /etc/s6-overlay/s6-rc.d/code-server/run && \
     touch /etc/s6-overlay/s6-rc.d/user/contents.d/code-server
 
