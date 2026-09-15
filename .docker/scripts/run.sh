@@ -10,11 +10,19 @@ if [ ! -d "/opt/VisibleSim/applicationsSrc/$1" ]; then
     exit 1
 fi
 
-# Build the application
+# Build the application (1/2)
 cd /opt/VisibleSim
 sudo cp /opt/VisibleSim/.applicationsSrc/Makefile /opt/VisibleSim/applicationsSrc/Makefile
 sudo DOCKER_CUSTOM_VAR__TARGET_APP="$1" make
+DOCKER_CUSTOM_VAR__MAKE_STATUS=$?
 sudo rm /opt/VisibleSim/applicationsSrc/Makefile
+
+# Check if the make command was successful
+if [ $DOCKER_CUSTOM_VAR__MAKE_STATUS -ne 0 ]; then
+    exit 1
+fi
+
+# Build the application (2/2)
 sudo cp /opt/VisibleSim/applicationsSrc/$1/config.xml /opt/VisibleSim/applicationsBin/$1/config.xml
 
 # Run the application
