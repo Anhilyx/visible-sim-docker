@@ -57,12 +57,13 @@ RUN apt-get install -y \
     ffmpeg \
     libsfml-dev
 
-COPY VisibleSim/Makefile /opt/VisibleSim/Makefile
-COPY VisibleSim/simulatorCore/src/Makefile /opt/VisibleSim/simulatorCore/src/Makefile
+# Copy fixes
+COPY VisibleSim.fix/ /opt/VisibleSim/
 
 RUN make
 
-COPY VisibleSim/.applicationsSrc/Makefile /opt/VisibleSim/.applicationsSrc/Makefile
+# Copy overrides
+COPY VisibleSim/ /opt/VisibleSim/
 
 #=================#
 # Install Scripts #
