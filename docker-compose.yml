@@ -19,6 +19,10 @@ services:
       - ./src:/opt/VisibleSim/applicationsSrc
 
     shm_size: "1gb"
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - apparmor:unconfined
     restart: unless-stopped
 
 volumes:

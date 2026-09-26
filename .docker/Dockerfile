@@ -69,11 +69,17 @@ COPY VisibleSim/ /opt/VisibleSim/
 # Install Scripts #
 #=================#
 
+# Required dependencies for the scripts
+RUN apt-get install -y \
+    gdb
+
 RUN mkdir -p /opt/scripts
 ENV PATH="${PATH}:/opt/scripts"
 
 COPY scripts/run.sh /opt/scripts/run
 RUN chmod +x /opt/scripts/run
+COPY scripts/catch.sh /opt/scripts/catch
+RUN chmod +x /opt/scripts/catch
 
 #======================#
 # Cleanup Installation #
